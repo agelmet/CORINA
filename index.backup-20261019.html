@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Κορίνα Διαμαντοπούλου | Ψυχολόγος - Ψυχοθεραπεύτρια</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              sand: {
+                50: '#f9f8f6',
+                100: '#f2f0eb',
+                200: '#e6e2d8',
+                300: '#d5cec0',
+                400: '#bcae9f',
+                500: '#a39382',
+                700: '#8c7b6b',
+                800: '#5e544a',
+                900: '#4d453e',
+              },
+              sage: {
+                50: '#f4f7f5',
+                100: '#e3ebe6',
+                200: '#c5d9cd',
+                300: '#9dbca9',
+                600: '#4d6f5e',
+                800: '#3a5245',
+                900: '#31443a',
+              }
+            },
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            animation: {
+              'fade-up': 'fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'pulse-slow': 'pulse 10s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              fadeUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+      body {
+        background-color: #f9f8f6;
+        color: #4d453e;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .hide-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scroll {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      
+      /* Utilities for Interaction */
+      .pointer-events-auto { pointer-events: auto; }
+      .pointer-events-none { pointer-events: none; }
+      .cursor-pointer { cursor: pointer; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="font-sans antialiased text-sand-900 bg-sand-50 selection:bg-sage-200 selection:text-sage-900">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-in-out px-4 md:px-8 py-6 pointer-events-none">
+      <div id="nav-container" class="max-w-6xl mx-auto flex items-center justify-between transition-all duration-500 bg-transparent relative pointer-events-auto">
+        <button onclick="scrollToSection('psych-hero-section')" class="font-serif text-xl md:text-2xl font-semibold tracking-wide text-sand-900 focus:outline-none hover:opacity-80 transition-opacity cursor-pointer z-[101]">
+          C.D.
+        </button>
+
+        <div class="hidden md:flex items-center space-x-8 z-[101]">
+          <button onclick="scrollToSection('psych-bio-section')" class="text-sand-800 hover:text-sand-500 text-sm tracking-widest uppercase font-medium transition-colors cursor-pointer px-2 py-1" data-key="nav.bio">Η ΨΥΧΟΛΟΓΟΣ</button>
+          <button onclick="scrollToSection('psych-services-section')" class="text-sand-800 hover:text-sand-500 text-sm tracking-widest uppercase font-medium transition-colors cursor-pointer px-2 py-1" data-key="nav.services">ΥΠΗΡΕΣΙΕΣ</button>
+          <button onclick="scrollToSection('psych-office-section')" class="text-sand-800 hover:text-sand-500 text-sm tracking-widest uppercase font-medium transition-colors cursor-pointer px-2 py-1" data-key="nav.office">ΧΩΡΟΣ</button>
+        </div>
+
+        <div class="flex items-center space-x-4 z-[101]">
+          <div class="flex items-center space-x-2 text-xs font-bold tracking-widest bg-white/50 px-3 py-1 rounded-full backdrop-blur-sm shadow-sm">
+            <button onclick="setLanguage('gr')" id="lang-gr" class="text-sand-900 border-b border-sand-900 transition-colors cursor-pointer">GR</button>
+            <span class="text-sand-400">/</span>
+            <button onclick="setLanguage('en')" id="lang-en" class="text-sand-400 hover:text-sand-600 transition-colors cursor-pointer">EN</button>
+          </div>
+
+          <button onclick="scrollToSection('psych-footer-section')" class="hidden md:block bg-sand-900 text-sand-50 px-5 py-2 rounded-full text-xs uppercase tracking-widest hover:bg-sage-800 transition-colors duration-300 shadow-lg cursor-pointer" data-key="nav.contact">
+            ΕΠΙΚΟΙΝΩΝΙΑ
+          </button>
+
+          <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-sand-900 focus:outline-none cursor-pointer">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-sand-50 z-[90] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out translate-x-full md:hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 p-2 text-sand-900 cursor-pointer">
+             <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <button onclick="scrollToSection('psych-bio-section'); toggleMobileMenu()" class="text-2xl font-serif text-sand-900 cursor-pointer" data-key="nav.bio">Η ΨΥΧΟΛΟΓΟΣ</button>
+        <button onclick="scrollToSection('psych-services-section'); toggleMobileMenu()" class="text-2xl font-serif text-sand-900 cursor-pointer" data-key="nav.services">ΥΠΗΡΕΣΙΕΣ</button>
+        <button onclick="scrollToSection('psych-office-section'); toggleMobileMenu()" class="text-2xl font-serif text-sand-900 cursor-pointer" data-key="nav.office">ΧΩΡΟΣ</button>
+        <button onclick="scrollToSection('psych-footer-section'); toggleMobileMenu()" class="text-xl font-serif text-white bg-sage-900 px-8 py-3 rounded-full shadow-lg cursor-pointer" data-key="nav.contact">ΕΠΙΚΟΙΝΩΝΙΑ</button>
+    </div>
+
+    <section id="psych-hero-section" class="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden bg-sand-50 z-0">
+      <div class="absolute inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-b from-sand-50/20 via-transparent to-sand-50 z-10"></div>
+        <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/697623cca87beb8e24cbe23a.jpg" alt="Sanctuary" class="w-full h-full object-cover opacity-90 scale-105 animate-pulse-slow">
+        <div class="absolute inset-0 bg-sand-100/30 backdrop-blur-[2px]"></div>
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center pt-20">
+        <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl text-sand-900 uppercase tracking-widest leading-snug mb-8 font-medium opacity-0 reveal-on-scroll" style="animation-delay: 0.5s;" data-key="hero.subtitle">
+          ΚΟΡΙΝΑ ΔΙΑΜΑΝΤΟΠΟΥΛΟΥ, ΨΥΧΟΛΟΓΟΣ - ΨΥΧΟΘΕΡΑΠΕΥΤΡΙΑ
+        </h1>
+        
+        <p class="font-sans text-lg md:text-xl text-sand-800 max-w-3xl mx-auto leading-relaxed mb-12 opacity-0 reveal-on-scroll" style="animation-delay: 1.1s;" data-key="hero.description">
+          Ο χώρος όπου πραγματοποιείται η ψυχοθεραπεία είναι σχεδιασμένος ετσι ώστε να ενισχύει την ηρεμία, την ιδιωτικότητα και να διευκολύνει τη διαδικασία.
+        </p>
+
+        <div class="opacity-0 reveal-on-scroll" style="animation-delay: 1.4s;">
+          <button onclick="scrollToSection('psych-footer-section')" class="group relative px-8 py-4 bg-sage-900 text-sage-50 rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+            <span class="relative z-10 font-medium tracking-widest text-sm uppercase flex items-center gap-2">
+              <span data-key="hero.cta">Προγραμματιστε Συνεδρια</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+            </span>
+            <div class="absolute inset-0 bg-sage-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out"></div>
+          </button>
+        </div>
+      </div>
+
+      <div class="absolute top-1/4 left-10 w-64 h-64 bg-sage-200/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+      <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-sand-300/20 rounded-full blur-3xl animate-pulse pointer-events-none" style="animation-direction: reverse;"></div>
+    </section>
+
+    <section id="psych-bio-section" class="py-24 md:py-32 bg-white relative overflow-hidden z-10">
+      <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-5 relative group flex justify-center lg:justify-end">
+          <div class="relative w-56 md:w-full md:max-w-xs mx-auto md:mx-0">
+            <div class="absolute inset-0 bg-sage-100 rounded-[3rem] transform rotate-3 scale-105 transition-transform duration-700 group-hover:rotate-0"></div>
+            <div class="relative overflow-hidden rounded-[2.5rem] shadow-2xl">
+              <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/68efc50caa49103e0616dd04.webp" alt="Corina Diamantopoulou" class="w-full h-auto object-cover transform transition-transform duration-1000 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-sage-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            </div>
+            <div class="absolute -bottom-6 -right-6 glass-panel p-6 rounded-2xl shadow-lg max-w-[200px] hidden md:block">
+              <p class="font-serif text-3xl text-sage-800" data-key="bio.exp_badge">10+</p>
+              <p class="text-xs text-sage-900 uppercase tracking-wide mt-1" data-key="bio.exp_label">Χρονια Εμπειριας</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-8">
+          <div class="space-y-4">
+            <h2 class="font-serif text-4xl md:text-5xl text-sand-900 leading-tight" data-key="bio.name">
+              ΚΟΡΙΝΑ ΔΙΑΜΑΝΤΟΠΟΥΛΟΥ
+            </h2>
+            <p class="text-sand-500 font-medium italic" data-key="bio.title">ΨΥΧΟΛΟΓΟΣ - ΨΥΧΟΘΕΡΑΠΕΥΤΡΙΑ</p>
+          </div>
+
+          <div class="font-sans text-sand-800 leading-relaxed text-lg space-y-6">
+            <p data-html-key="bio.intro"></p>
+            
+            <div class="bg-sand-50 rounded-2xl p-6 md:p-8 transition-all duration-500 hover:shadow-lg border border-sand-100">
+              <button onclick="toggleAccordion('bio-accordion', this)" class="w-full flex items-center justify-between group cursor-pointer">
+                <span class="font-serif text-xl text-sage-900 text-left" data-key="bio.accordion_title">Τι είναι η Συνθετική Ψυχοθεραπεία;</span>
+                <span class="icon-wrapper flex-shrink-0 w-8 h-8 rounded-full border border-sage-300 flex items-center justify-center text-sage-600 transition-transform duration-300">
+                   <i data-lucide="plus" class="w-4 h-4"></i>
+                </span>
+              </button>
+              
+              <div id="bio-accordion" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out">
+                <div class="overflow-hidden">
+                  <div class="space-y-4 text-base text-sand-700 mt-6">
+                    <p data-key="bio.accordion_content">...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button onclick="toggleCV(true)" class="text-sage-800 border-b border-sage-800 pb-1 hover:text-sage-600 hover:border-sage-400 transition-colors uppercase text-xs tracking-[0.2em] font-bold cursor-pointer" data-key="bio.cv_button">
+                ΔΕΙΤΕ ΤΟ ΒΙΟΓΡΑΦΙΚΟ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="cv-modal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-sand-900/60 backdrop-blur-sm" onclick="toggleCV(false)"></div>
+        <div class="bg-white rounded-3xl p-8 md:p-12 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl animate-fade-up">
+            <button onclick="toggleCV(false)" class="absolute top-6 right-6 text-sand-400 hover:text-sand-900 cursor-pointer">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <h3 class="font-serif text-3xl text-sage-900 mb-8" data-key="bio.cv_title">Ακαδημαϊκή Πορεία</h3>
+            
+            <div class="space-y-8">
+              <div class="border-l-2 border-sage-200 pl-6 relative">
+                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-sage-200"></span>
+                <h4 class="font-bold text-lg text-sand-900" data-key="bio.cv_edu_1_title">BSc Psychology</h4>
+                <p class="text-sand-600" data-key="bio.cv_edu_1_desc">Goldsmiths College, University of London</p>
+              </div>
+              
+              <div class="border-l-2 border-sage-200 pl-6 relative">
+                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-sage-200"></span>
+                <h4 class="font-bold text-lg text-sand-900" data-key="bio.cv_edu_2_title">MSc History and Theory of Psychology</h4>
+                <p class="text-sand-600" data-key="bio.cv_edu_2_desc">University of Edinburgh</p>
+              </div>
+
+              <div class="border-l-2 border-sage-200 pl-6 relative">
+                <span class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-sage-200"></span>
+                <h4 class="font-bold text-lg text-sand-900" data-key="bio.cv_specs_title">Εξειδικεύσεις</h4>
+                <ul id="cv-specs-list" class="mt-2 space-y-2 text-sand-600 text-sm">
+                  </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="psych-services-section" class="py-24 bg-sand-100 relative z-10">
+      <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-sand-300 to-transparent"></div>
+      
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+          <span class="text-sage-600 font-bold tracking-widest text-xs uppercase block mb-4" data-key="services.label">Οι Υπηρεσίες</span>
+          <h2 class="font-serif text-4xl md:text-5xl text-sand-900 mb-6" data-key="services.title">Υπηρεσίες & Συνεδρίες</h2>
+          <p class="max-w-3xl mx-auto text-sand-600 leading-relaxed" data-key="services.description">
+             ...
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-20 items-start">
+            
+            <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 border border-transparent shadow-sm hover:shadow-md" id="service-card-1">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-sage-50 rounded-bl-[60px] -mr-6 -mt-6 transition-colors group-hover:bg-sage-100 pointer-events-none opacity-50"></div>
+                
+                <button onclick="toggleService('service-content-1', 'service-card-1')" class="w-full text-left px-6 py-4 flex flex-col md:flex-row md:items-center justify-between relative z-10 cursor-pointer">
+                   <div class="pr-4">
+                       <h3 class="font-serif text-lg md:text-xl text-sand-900 group-hover:text-sage-800 transition-colors" data-key="services.items.0.title">Ατομική Ψυχοθεραπεία</h3>
+                       <p class="text-sand-500 font-medium text-xs md:text-sm mt-1 leading-tight line-clamp-1 service-short" data-key="services.items.0.short">...</p>
+                   </div>
+                   <div class="icon-wrapper flex-shrink-0 mt-2 md:mt-0 w-6 h-6 rounded-full border border-sand-200 flex items-center justify-center text-sage-600 transition-all duration-500 group-hover:border-sage-300">
+                       <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                   </div>
+                </button>
+
+                <div id="service-content-1" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out">
+                    <div class="overflow-hidden">
+                        <div class="px-6 pb-5 pt-0 border-t border-sand-100/50">
+                            <p class="text-sand-700 leading-relaxed text-sm mb-3 pt-2 whitespace-pre-line" data-key="services.items.0.full">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 border border-transparent shadow-sm hover:shadow-md" id="service-card-2">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-sage-50 rounded-bl-[60px] -mr-6 -mt-6 transition-colors group-hover:bg-sage-100 pointer-events-none opacity-50"></div>
+                <button onclick="toggleService('service-content-2', 'service-card-2')" class="w-full text-left px-6 py-4 flex flex-col md:flex-row md:items-center justify-between relative z-10 cursor-pointer">
+                   <div class="pr-4">
+                       <h3 class="font-serif text-lg md:text-xl text-sand-900 group-hover:text-sage-800 transition-colors" data-key="services.items.1.title">Ομαδική Ψυχοθεραπεία</h3>
+                       <p class="text-sand-500 font-medium text-xs md:text-sm mt-1 leading-tight line-clamp-1 service-short" data-key="services.items.1.short">...</p>
+                   </div>
+                   <div class="icon-wrapper flex-shrink-0 mt-2 md:mt-0 w-6 h-6 rounded-full border border-sand-200 flex items-center justify-center text-sage-600 transition-all duration-500 group-hover:border-sage-300">
+                       <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                   </div>
+                </button>
+                <div id="service-content-2" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out">
+                    <div class="overflow-hidden">
+                        <div class="px-6 pb-5 pt-0 border-t border-sand-100/50">
+                            <p class="text-sand-700 leading-relaxed text-sm mb-3 pt-2 whitespace-pre-line" data-key="services.items.1.full">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 border border-transparent shadow-sm hover:shadow-md" id="service-card-3">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-sage-50 rounded-bl-[60px] -mr-6 -mt-6 transition-colors group-hover:bg-sage-100 pointer-events-none opacity-50"></div>
+                <button onclick="toggleService('service-content-3', 'service-card-3')" class="w-full text-left px-6 py-4 flex flex-col md:flex-row md:items-center justify-between relative z-10 cursor-pointer">
+                   <div class="pr-4">
+                       <h3 class="font-serif text-lg md:text-xl text-sand-900 group-hover:text-sage-800 transition-colors" data-key="services.items.2.title">Online & English</h3>
+                       <p class="text-sand-500 font-medium text-xs md:text-sm mt-1 leading-tight line-clamp-1 service-short" data-key="services.items.2.short">...</p>
+                   </div>
+                   <div class="icon-wrapper flex-shrink-0 mt-2 md:mt-0 w-6 h-6 rounded-full border border-sand-200 flex items-center justify-center text-sage-600 transition-all duration-500 group-hover:border-sage-300">
+                       <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                   </div>
+                </button>
+                <div id="service-content-3" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out">
+                    <div class="overflow-hidden">
+                        <div class="px-6 pb-5 pt-0 border-t border-sand-100/50">
+                            <p class="text-sand-700 leading-relaxed text-sm mb-3 pt-2 whitespace-pre-line" data-key="services.items.2.full">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 border border-transparent shadow-sm hover:shadow-md" id="service-card-4">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-sage-50 rounded-bl-[60px] -mr-6 -mt-6 transition-colors group-hover:bg-sage-100 pointer-events-none opacity-50"></div>
+                <button onclick="toggleService('service-content-4', 'service-card-4')" class="w-full text-left px-6 py-4 flex flex-col md:flex-row md:items-center justify-between relative z-10 cursor-pointer">
+                   <div class="pr-4">
+                       <h3 class="font-serif text-lg md:text-xl text-sand-900 group-hover:text-sage-800 transition-colors" data-key="services.items.3.title">Κόστη Υπηρεσιών</h3>
+                       <p class="text-sand-500 font-medium text-xs md:text-sm mt-1 leading-tight line-clamp-1 service-short" data-key="services.items.3.short">...</p>
+                   </div>
+                   <div class="icon-wrapper flex-shrink-0 mt-2 md:mt-0 w-6 h-6 rounded-full border border-sand-200 flex items-center justify-center text-sage-600 transition-all duration-500 group-hover:border-sage-300">
+                       <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                   </div>
+                </button>
+                <div id="service-content-4" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out">
+                    <div class="overflow-hidden">
+                        <div class="px-6 pb-5 pt-0 border-t border-sand-100/50">
+                            <p class="text-sand-700 leading-relaxed text-sm mb-3 pt-2 whitespace-pre-line" data-key="services.items.3.full">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-sand-200 pt-12">
+            <div class="text-center">
+              <div class="font-serif text-3xl md:text-4xl text-sage-800 mb-2">100%</div>
+              <div class="text-xs uppercase tracking-widest text-sand-500" data-key="services.stats.personalized">Εξατομικευμενη Φροντιδα</div>
+            </div>
+            <div class="text-center">
+              <div class="font-serif text-3xl md:text-4xl text-sage-800 mb-2">200+</div>
+              <div class="text-xs uppercase tracking-widest text-sand-500" data-key="services.stats.patients">Ευχαριστημενοι Θεραπευομενοι</div>
+            </div>
+            <div class="text-center">
+              <div class="font-serif text-3xl md:text-4xl text-sage-800 mb-2">5+</div>
+              <div class="text-xs uppercase tracking-widest text-sand-500" data-key="services.stats.services">Διαφορετικες Υπηρεσιες</div>
+            </div>
+            <div class="text-center">
+              <div class="font-serif text-3xl md:text-4xl text-sage-800 mb-2">10+</div>
+              <div class="text-xs uppercase tracking-widest text-sand-500" data-key="services.stats.years">Χρονια</div>
+            </div>
+        </div>
+        
+      </div>
+    </section>
+
+    <section id="psych-office-section" class="py-24 bg-white overflow-hidden relative z-10">
+        <div class="max-w-7xl mx-auto px-6 mb-12 flex flex-col md:flex-row md:items-end justify-between">
+            <div>
+              <span class="text-sage-600 font-bold tracking-widest text-xs uppercase block mb-4" data-key="office.label"></span>
+              <h2 class="font-serif text-4xl md:text-5xl text-sand-900" data-key="office.title">Ο ΧΩΡΟΣ</h2>
+            </div>
+        </div>
+        
+        <div class="flex space-x-6 overflow-x-auto px-6 pb-12 hide-scroll snap-x snap-mandatory">
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de707b34b644b30abb551.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de707e125ef72a82d486f.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de7074e42b9736cd4e05f.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de7074e42b93ac5d4e05e.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de707e125ef653b2d4871.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+            <div class="flex-none w-[85vw] md:w-[400px] aspect-[4/3] relative rounded-2xl overflow-hidden snap-center group shadow-md hover:shadow-xl transition-all duration-500">
+                <img src="https://assets.cdn.filesafe.space/61icdoMiJ2pHklO6mmKW/media/696de707e125ef4b002d4870.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            </div>
+        </div>
+    </section>
+
+    <footer id="psych-footer-section" class="bg-sand-900 text-sand-100 py-20 relative overflow-hidden z-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-sand-800 rounded-full blur-[100px] opacity-30 -mr-20 -mt-20"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-24">
+                
+                <div class="lg:col-span-5 space-y-8">
+                    <h2 class="font-serif text-3xl md:text-4xl text-sand-50" data-key="footer.cta_title">
+                         
+                    </h2>
+                    <div class="pt-4">
+                        <a href="mailto:corina.diamanto@gmail.com" class="inline-block border border-sand-700 px-8 py-4 rounded-full hover:bg-sand-100 hover:text-sand-900 transition-all duration-300 uppercase tracking-widest text-sm" data-key="footer.button">
+                            ΕΠΙΚΟΙΝΩΝΙΑ
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-3 space-y-8">
+                    <div>
+                        <h4 class="font-serif text-xl text-sand-50 mb-4" data-key="footer.hours_title">Ωράριο</h4>
+                        <p class="text-sand-400 font-light whitespace-pre-line" data-key="footer.hours_text">Δευτέρα - Παρασκευή (Κατόπιν Ραντεβού)</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-xl text-sand-50 mb-4" data-key="footer.contact_title">Επικοινωνία</h4>
+                        <p class="text-sand-400 font-light space-y-2 flex flex-col">
+                            <a href="tel:+306996269622" class="hover:text-white transition-colors">+306996269622</a>
+                            <a href="mailto:corina.diamanto@gmail.com" class="hover:text-white transition-colors">corina.diamanto@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 space-y-6">
+                    <div>
+                        <h4 class="font-serif text-xl text-sand-50 mb-4" data-key="footer.location_title">Τοποθεσία</h4>
+                        <address class="text-sand-400 font-light not-italic mb-4" data-key="footer.location_text">
+                            Διοχάρους 5 (πλησίον Hilton), Ιλίσια, Αττική
+                        </address>
+                        <a href="https://maps.google.com/?q=Διοχάρους+5+Ιλίσια" target="_blank" class="text-xs uppercase tracking-widest border-b border-sand-700 pb-1 hover:text-white hover:border-white transition-colors" data-key="footer.map_link">
+                            Άνοιγμα στον χάρτη
+                        </a>
+                    </div>
+                    <div class="w-full h-40 bg-sand-800 rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3144.869875971476!2d23.7486483!3d37.9723214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a1bd44167098df%3A0x600649727407980!2sDiocharous%205%2C%20Athina%20115%2028%2C%20Greece!5e0!3m2!1sen!2sus!4v1709840000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+             <div class="mt-20 pt-8 border-t border-sand-800 flex flex-col md:flex-row justify-between items-center text-xs text-sand-500 uppercase tracking-widest">
+                <p data-key="footer.rights">© 2026 Corina Diamantopoulou.</p>
+                <p class="mt-2 md:mt-0" data-key="footer.designed">Designed by Advon Media</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. CONTENT DATA ---
+        const content = {
+            gr: {
+                nav: { bio: 'Η ΨΥΧΟΛΟΓΟΣ', services: 'ΥΠΗΡΕΣΙΕΣ', office: 'ΧΩΡΟΣ', contact: 'ΕΠΙΚΟΙΝΩΝΙΑ' },
+                hero: { subtitle: 'ΚΟΡΙΝΑ ΔΙΑΜΑΝΤΟΠΟΥΛΟΥ, ΨΥΧΟΛΟΓΟΣ - ΨΥΧΟΘΕΡΑΠΕΥΤΡΙΑ', title_prefix: 'Ένα ταξίδι προς την', title_highlight: 'αυτογνωσία & εξέλιξη', description: 'Ο χώρος όπου πραγματοποιείται η ψυχοθεραπεία είναι σχεδιασμένος ετσι ώστε να ενισχύει την ηρεμία, την ιδιωτικότητα και να διευκολύνει τη διαδικασία, είτε πρόκειται για ατομική είτε για ομαδική ψυχοθεραπεία. Βρίσκεται στα Ιλίσια, σε εύκολα προσβάσιμο σημείο.', cta: 'Προγραμματιστε Συνεδρια' },
+                bio: { name: 'ΚΟΡΙΝΑ ΔΙΑΜΑΝΤΟΠΟΥΛΟΥ', title: 'ΨΥΧΟΛΟΓΟΣ - ΨΥΧΟΘΕΡΑΠΕΥΤΡΙΑ', intro: 'Ονομάζομαι Κορίνα Διαμαντοπούλου και είμαι ψυχολόγος-ψυχοθεραπεύτρια με άδεια ασκήσεως επαγγέλματος. Εργάζομαι με ενήλικες σε ατομικό και ομαδικό πλαίσιο με βασικό μοντέλο προσέγγισης τη <span class="font-serif text-sage-800 italic text-xl">συνθετική ψυχοθεραπεία</span>.', accordion_title: 'Τι είναι η Συνθετική Ψυχοθεραπεία;', accordion_content: 'Η συνθετική ψυχοθεραπεία είναι μια προσέγγιση που συνδυάζει στοιχεία διαφορετικών επιστημονικών προσεγγίσεων όπως η γνωσιακή, η ψυχοδυναμική και άλλων. Είναι μια προσέγγιση που μπορεί να ανανεώνεται καθώς οι επιστημονικές έρευνες συνεχώς εξελίσσονται. Βασική της αρχή είναι πως η διαφορετικότητα των ανθρώπων αλλά και η πολυπλοκότητα του ατόμου δεν υπακούει σε ένα συγκεκριμένο μοντέλο ανθρώπινης συμπεριφοράς και άρα μία συγκεκριμένη προσέγγιση. Καθώς οι συνιστώσες που επηρεάζουν την ανθρώπινη συμπεριφορά, είναι τόσες πολλές και τόσο μοναδικές στον κάθε άνθρωπο, απαιτείται η διαμόρφωση ενός μοναδικού μοντέλου, μέσα από μια σύνθεση όλων των παραπάνω, ώστε να καλυφθούν οι ανάγκες του συγκεκριμένου ατόμου στη συγκεκριμένη στιγμή. Οι συνεδρίες πραγματοποιούνται στην Ελληνική ή Αγγλική γλώσσα.', cv_button: 'ΔΕΙΤΕ ΤΟ ΒΙΟΓΡΑΦΙΚΟ', cv_title: 'Ακαδημαϊκή Πορεία', cv_edu_1_title: 'BSc Psychology', cv_edu_1_desc: 'Goldsmiths College, University of London', cv_edu_2_title: 'MSc History and Theory of Psychology', cv_edu_2_desc: 'University of Edinburgh', cv_specs_title: 'Εξειδικεύσεις', cv_specs_list: ['Συνθετική Ψυχοθεραπεία (Πολυκέντρο Ψυχιατρικής)', 'Θεραπεία Σχημάτων (Ελληνική Εταιρία Θεραπείας Σχημάτων)', 'Κλινική Ψυχοπαθολογία (ΕΚΠΑ)', 'Σύστημα πρώιμης παρέμβασης Portage'], exp_badge: '10+', exp_label: 'Χρονια Εμπειριας' },
+                services: { label: 'Οι Υπηρεσίες', title: 'Υπηρεσίες & Συνεδρίες', description: 'Κάθε συνεδρία προσαρμόζεται στις ανάγκες του ατόμου, προσφέροντας έναν χώρο κατανόησης, ενσυναίσθησης και προσωπικής ανάπτυξης. Στόχος είναι η ουσιαστική στήριξη και η ενίσχυση της ψυχικής ισορροπίας μέσα από εξατομικευμένη προσέγγιση.', items: [ { title: 'Ατομική Ψυχοθεραπεία Ενηλίκων', short: 'Ατομικό πλαίσιο συνεδριών', full: 'Στο πλαίσιο της ατομικής ψυχοθεραπείας δουλεύονται τα αιτήματα που θα φέρει ο κάθε θεραπευμένος/η. Εξερευνώνται σκέψεις, συναισθήματα και μοτίβα που εν τέλει επηρεάζουν αρνητικά την καθημερινότητα, με στόχο την κατανόηση αυτών και την επαναπροσαρμογή τους καθώς και τη μείωση συμπτωμάτων όπου προκύπτουν, για μια καλύτερη ποιότητα ζωής. Ο ρυθμός και η κατεύθυνση της ψυχοθεραπείας προσαρμόζονται στις ανάγκες του/της κάθε θεραπευμένου/ης. Η διάρκεια της συνεδρίας είναι στα 60 λεπτά. Η συνολική διάρκεια μιας ολοκληρωμένης ψυχοθεραπευτικής διαδικασίας διαφέρει ανάλογα τα αιτήματα και τη συχνότητα των συνεδρίων.' }, { title: 'Ομαδική Ψυχοθεραπεία Ενηλίκων', short: 'Δυναμική της ομάδας', full: 'Στο πλαίσιο της ομαδικής ψυχοθεραπείας διαμορφώνεται μια ομάδα θεραπευμένων όπου μέσα από την αλληλοεπίδραση, τη δυναμική και την ασφάλεια μιας σταθερής ομάδας δουλεύονται προσωπικά θέματα που θα φέρει ο καθένας και η καθεμία. Η διάρκεια της συνεδρίας διαφέρει ανάλογα με το σύνολο των θεραπευμένων, συνηθώς κυμαίνεται 90 με 120 λεπτά. Η διάρκεια μέχρι να ολοκληρωθεί μια ομαδική θεραπεία διαφέρει καθότι διαμορφώνεται ανάλογα με τους στόχους τις εκάστοτε ομάδας.' }, { title: 'Online & English Therapy', short: 'Θεραπεία χωρίς σύνορα', full: 'Πλήρως προσαρμοσμένες συνεδρίες μέσω διαδικτύου για όσους βρίσκονται μακριά ή προτιμούν την εξ αποστάσεως επικοινωνία. Παρέχονται επίσης συνεδρίες στην Αγγλική γλώσσα.' }, { title: 'Κόστη Υπηρεσιών', short: 'Αναλυτικός τιμοκατάλογος', full: 'Ατομική ψυχοθεραπεία ενηλίκων: 60 ευρώ (60’)\nΟμαδική θεραπεία: 40 ευρώ (90’-120’)\nOnline θεραπεία: 60 ευρώ\nΕιδικό κόστος (άνεργοι, ΑΜΕΑ, φοιτητές): 50 ευρώ\n\n* Τα κόστη είναι ενδεικτικά. Ενδέχεται να υπάρξουν αλλαγές κατά την επίσκεψη ανάλογα το περιστατικό.' } ], stats: { personalized: 'Εξατομικευμενη Φροντιδα', patients: 'Ευχαριστημενοι Θεραπευομενοι', services: 'Διαφορετικες Υπηρεσιες', years: 'Χρονια' } },
+                office: { label: '', title: 'Ο ΧΩΡΟΣ' },
+                footer: { cta_title: '', button: 'ΕΠΙΚΟΙΝΩΝΙΑ', hours_title: 'Ωράριο', hours_text: 'Δευτέρα - Παρασκευή (Κατόπιν Ραντεβού)', contact_title: 'Επικοινωνία', location_title: 'Τοποθεσία', location_text: 'Διοχάρους 5 (πλησίον Hilton), Ιλίσια, Αττική', map_link: 'Άνοιγμα στον χάρτη', rights: '© 2026 Corina Diamantopoulou.', designed: 'Designed by Advon Media' }
+            },
+            en: {
+                nav: { bio: 'THE PSYCHOLOGIST', services: 'SERVICES', office: 'THE SPACE', contact: 'CONTACT' },
+                hero: { subtitle: 'CORINA DIAMANTOPOULOU, PSYCHOLOGIST - PSYCHOTHERAPIST', title_prefix: 'A journey towards', title_highlight: 'self-discovery & growth', description: 'The space where psychotherapy takes place is designed to enhance calmness, privacy, and facilitate the process, whether for individual or group psychotherapy. Located in Ilisia, in an easily accessible location.', cta: 'Schedule Session' },
+                bio: { name: 'CORINA DIAMANTOPOULOU', title: 'PSYCHOLOGIST - PSYCHOTHERAPIST', intro: 'My name is Corina Diamantopoulou and I am a licensed psychologist-psychotherapist. I work with adults in individual and group settings with <span class="font-serif text-sage-800 italic text-xl">integrative psychotherapy</span> as my primary approach model.', accordion_title: 'What is Integrative Psychotherapy?', accordion_content: 'Integrative psychotherapy is an approach that combines elements of different scientific approaches such as cognitive, psychodynamic, and others. It is an approach that can be renewed as scientific research constantly evolves. Its basic principle is that human diversity and complexity do not obey a specific model of human behavior and therefore a specific approach. Since the components affecting human behavior are so many and unique to each person, formulating a unique model through a synthesis of all the above is required to cover the specific person\'s needs at the specific moment. Sessions are held in Greek or English.', cv_button: 'VIEW CV', cv_title: 'Academic Path', cv_edu_1_title: 'BSc Psychology', cv_edu_1_desc: 'Goldsmiths College, University of London', cv_edu_2_title: 'MSc History and Theory of Psychology', cv_edu_2_desc: 'University of Edinburgh', cv_specs_title: 'Specializations', cv_specs_list: ['Integrative Psychotherapy (Psychiatric Polycener)', 'Schema Therapy (Greek Society of Schema Therapy)', 'Clinical Psychopathology (NKUA)', 'Portage Early Intervention System'], exp_badge: '10+', exp_label: 'Years Experience' },
+                services: { label: 'Services', title: 'Services & Sessions', description: 'Each session is adapted to the individual\'s needs, offering a space of understanding, empathy, and personal development. The goal is substantial support and strengthening of mental balance through a personalized approach.', items: [ { title: 'Adult Individual Psychotherapy', short: 'Individual session framework', full: 'In the context of individual psychotherapy, the requests brought by each patient are worked on. Thoughts, emotions, and patterns that ultimately negatively affect daily life are explored, aiming at understanding and readjusting them as well as reducing symptoms where they arise, for a better quality of life. The pace and direction of psychotherapy are adapted to the needs of each patient. The duration of the session is 60 minutes. The total duration of a completed psychotherapeutic process differs depending on the requests and the frequency of sessions.' }, { title: 'Adult Group Psychotherapy', short: 'Group Dynamics', full: 'In this context, a group of people is formed where, through interaction, dynamics, and the safety of a stable group, personal issues brought by each individual are worked on. The duration of the session differs depending on the total number of patients, usually ranging from 90 to 120 minutes. The duration until a group therapy is completed differs as it is shaped according to the goals of each group.' }, { title: 'Online & English Therapy', short: 'Therapy without borders', full: 'Fully adapted online sessions for those who are far away or prefer remote communication. Sessions are also provided in the English language.' }, { title: 'Service Costs', short: 'Detailed price list', full: 'Adult Individual Psychotherapy: 60€ (60’)\nGroup Therapy: 40€ (90’-120’)\nOnline Therapy: 60€\nSpecial Rates (Unemployed, PWD, Students): 50€\n\n* Costs are indicative. Changes may occur during the visit depending on the case.' } ], stats: { personalized: 'Personalized Care', patients: 'Happy Patients', services: 'Different Services', years: 'Years' } },
+                office: { label: '', title: 'THE SPACE' },
+                footer: { cta_title: '', button: 'CONTACT', hours_title: 'Hours', hours_text: 'Monday - Friday (By Appointment)', contact_title: 'Contact', location_title: 'Location', location_text: 'Diocharous 5 (near Hilton), Ilisia, Athens', map_link: 'Open in Maps', rights: '© 2026 Corina Diamantopoulou.', designed: 'Designed by Advon Media' }
+            }
+        };
+
+        let currentLang = 'gr';
+
+        // --- 2. LANGUAGE LOGIC ---
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update Toggle Styles
+            const grBtn = document.getElementById('lang-gr');
+            const enBtn = document.getElementById('lang-en');
+            
+            if (lang === 'gr') {
+                grBtn.className = 'text-sand-900 border-b border-sand-900 transition-colors cursor-pointer';
+                enBtn.className = 'text-sand-400 hover:text-sand-600 transition-colors cursor-pointer';
+            } else {
+                grBtn.className = 'text-sand-400 hover:text-sand-600 transition-colors cursor-pointer';
+                enBtn.className = 'text-sand-900 border-b border-sand-900 transition-colors cursor-pointer';
+            }
+
+            // Update Text Elements
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                const val = getNestedValue(content[lang], key);
+                // Allow empty strings to clear content
+                if (val !== undefined) el.textContent = val;
+            });
+
+            // Update HTML Elements (for intro)
+            document.querySelectorAll('[data-html-key]').forEach(el => {
+                const key = el.getAttribute('data-html-key');
+                const val = getNestedValue(content[lang], key);
+                if (val !== undefined) el.innerHTML = val;
+            });
+
+            // Update List Items (Specs)
+            const listContainer = document.getElementById('cv-specs-list');
+            if (listContainer) {
+                listContainer.innerHTML = content[lang].bio.cv_specs_list.map(item => `<li>• ${item}</li>`).join('');
+            }
+        }
+
+        function getNestedValue(obj, path) {
+            return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+        }
+
+        // --- 3. INTERACTIVITY FUNCTIONS ---
+        
+        // Scroll to Section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+                menu.classList.add('translate-x-0');
+            } else {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+            }
+        }
+
+        // Accordion (Bio)
+        function toggleAccordion(id, btn) {
+            const content = document.getElementById(id);
+            const isExpanded = content.classList.contains('grid-rows-[1fr]');
+            const icon = btn.querySelector('.icon-wrapper');
+            
+            if (isExpanded) {
+                content.classList.remove('grid-rows-[1fr]');
+                content.classList.add('grid-rows-[0fr]');
+                icon.classList.remove('rotate-45');
+                icon.classList.remove('bg-sage-50', 'border-sage-200'); // Reset active styles
+            } else {
+                content.classList.remove('grid-rows-[0fr]');
+                content.classList.add('grid-rows-[1fr]');
+                icon.classList.add('rotate-45');
+                icon.classList.add('bg-sage-50', 'border-sage-200'); // Add active styles
+            }
+        }
+
+        // Service Toggles
+        function toggleService(contentId, cardId) {
+            const content = document.getElementById(contentId);
+            const card = document.getElementById(cardId);
+            const isExpanded = content.classList.contains('grid-rows-[1fr]');
+            const iconWrapper = card.querySelector('.icon-wrapper');
+            const shortDesc = card.querySelector('.service-short');
+
+            if (isExpanded) {
+                content.classList.remove('grid-rows-[1fr]');
+                content.classList.add('grid-rows-[0fr]');
+                card.classList.remove('shadow-xl', 'ring-1', 'ring-sage-200');
+                card.classList.add('shadow-sm');
+                iconWrapper.classList.remove('rotate-180', 'bg-sage-50', 'border-sage-200');
+                if (shortDesc) shortDesc.style.display = 'block';
+            } else {
+                content.classList.remove('grid-rows-[0fr]');
+                content.classList.add('grid-rows-[1fr]');
+                card.classList.add('shadow-xl', 'ring-1', 'ring-sage-200');
+                card.classList.remove('shadow-sm');
+                iconWrapper.classList.add('rotate-180', 'bg-sage-50', 'border-sage-200');
+                if (shortDesc) shortDesc.style.display = 'none';
+            }
+        }
+
+        // CV Modal
+        function toggleCV(show) {
+            const modal = document.getElementById('cv-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scroll
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // --- 4. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+            
+            // Set Initial Language
+            setLanguage('gr');
+
+            // Scroll Listener for Navbar & Scroll Animations
+            const nav = document.getElementById('navbar');
+            const navContainer = document.getElementById('nav-container');
+            
+            const observerOptions = {
+              root: null,
+              rootMargin: '0px',
+              threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('animate-fade-up', 'opacity-100');
+                  entry.target.classList.remove('opacity-0');
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.remove('py-6');
+                    nav.classList.add('py-3');
+                    navContainer.classList.add('glass-panel', 'rounded-full', 'px-6', 'py-3', 'shadow-sm');
+                } else {
+                    nav.classList.add('py-6');
+                    nav.classList.remove('py-3');
+                    navContainer.classList.remove('glass-panel', 'rounded-full', 'px-6', 'py-3', 'shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

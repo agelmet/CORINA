@@ -1,0 +1,16 @@
+{
+ "source": {
+  "kind": "file",
+  "ref": "assets/img/korina-diamantopoulou-logo.svg"
+ },
+ "source_md5": "a5f266a43e7cfc029d05c04e9f603ad4",
+ "version": "8d1ae3b9",
+ "tile": "#F7F3EC",
+ "crop": null,
+ "header": [
+  "inline",
+  "index.html",
+  "9be672c0d53cc81b33525db099165246"
+ ],
+ "made": "2026-10-19"
+}
