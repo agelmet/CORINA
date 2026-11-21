@@ -74,7 +74,17 @@
 @keyframes advon-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.advon-ck{animation:none}}
 </style>
-</head>
+<style id="phone-fit">@media (max-width:760px){
+#top.hero{min-height:0!important;height:auto!important;display:flex!important;flex-direction:column}
+#top .stage{position:relative!important;inset:auto!important;height:auto!important;margin-top:84px;order:-1}
+#top .stage .print,#top .stage .hm{position:relative!important;inset:auto!important;height:auto!important;opacity:1!important;transform:none!important;filter:none!important}
+#top .hm img{position:static!important;width:100%!important;height:auto!important;object-fit:contain!important;display:block;transform:none!important;filter:none!important;opacity:1!important}
+#top .stage::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:35%;background:linear-gradient(rgba(247,243,236,0),#f7f3ec)}
+#top .veil{display:none!important}
+#top .hero-in{padding-top:6px!important;min-height:0!important;padding-bottom:40px}
+#top .hero-mk{display:none}
+#top h1 .nm{font-size:min(10.6vw,46px)!important}
+#top .cue{display:none}}</style></head>
 <body>
 <div class="intro" aria-hidden="true"><span class="i-mk"><svg class="mk" viewBox="0 0 48 48" aria-hidden="true"><path class="s1" pathLength="1" d="M9 7.5C9 20 13.5 27.5 24 29"/><path class="s3" pathLength="1" d="M39 7.5C39 20 34.5 27.5 24 29"/><path class="s2" pathLength="1" d="M24 5.5V41M18 41.5h12"/></svg></span></div>
 <div class="grain" aria-hidden="true"></div>
